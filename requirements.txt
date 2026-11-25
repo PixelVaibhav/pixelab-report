@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+python-multipart
+google-genai
+pymupdf
+pillow
+pydantic
+pillow-heif
+numpy
+pydicom
+pylibjpeg
+pylibjpeg-libjpeg
+pylibjpeg-openjpeg
+gTTS
+python-dotenv

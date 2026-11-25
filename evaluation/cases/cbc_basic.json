@@ -1,0 +1,37 @@
+[
+ {
+  "name": "Hemoglobin",
+  "value_number": 11.2,
+  "status": "LOW"
+ },
+ {
+  "name": "RBC",
+  "value_number": 4.9,
+  "status": "NORMAL"
+ },
+ {
+  "name": "WBC",
+  "value_number": 12.4,
+  "status": "HIGH"
+ },
+ {
+  "name": "Platelets",
+  "value_number": 250,
+  "status": "NORMAL"
+ },
+ {
+  "name": "MCV",
+  "value_number": 78.0,
+  "status": "LOW"
+ },
+ {
+  "name": "Neutrophils",
+  "value_number": 62,
+  "status": "NORMAL"
+ },
+ {
+  "name": "Lymphocytes",
+  "value_number": 30,
+  "status": "NORMAL"
+ }
+]

@@ -1,0 +1,42 @@
+[
+ {
+  "name": "Total Cholesterol",
+  "value_number": 228,
+  "status": "HIGH"
+ },
+ {
+  "name": "HDL Cholesterol",
+  "value_number": 38,
+  "status": "LOW"
+ },
+ {
+  "name": "LDL Cholesterol",
+  "value_number": 152,
+  "status": "HIGH"
+ },
+ {
+  "name": "Triglycerides",
+  "value_number": 190,
+  "status": "HIGH"
+ },
+ {
+  "name": "ALT (SGPT)",
+  "value_number": 62,
+  "status": "HIGH"
+ },
+ {
+  "name": "AST (SGOT)",
+  "value_number": 30,
+  "status": "NORMAL"
+ },
+ {
+  "name": "Bilirubin",
+  "value_number": 0.8,
+  "status": "NORMAL"
+ },
+ {
+  "name": "Albumin",
+  "value_number": 4.4,
+  "status": "NORMAL"
+ }
+]

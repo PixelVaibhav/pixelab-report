@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pixelab Report — Understand any medical report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Hanken+Grotesk:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a1122;--card:#111c38;--ink:#e9eeff;--mute:#9aa8cf;--line:#22325c;--acc:#8d7bff;--red:#ff6b7d;--green:#46d89a;--amber:#ffc85a;--blue:#5cc8ff;--sh:0 12px 40px rgba(2,6,20,.45)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:'Hanken Grotesk','Noto Sans Devanagari',system-ui,sans-serif;background:radial-gradient(900px 520px at 85% -8%,rgba(141,123,255,.22),transparent 60%),radial-gradient(700px 420px at -5% 35%,rgba(92,200,255,.09),transparent 60%),var(--bg);background-attachment:fixed;color:var(--ink);line-height:1.6}
+[hidden]{display:none!important}a{color:inherit}button,select{font:inherit;color:inherit}:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.nav{position:sticky;top:0;z-index:20;background:rgba(10,17,34,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
+.logo{font:800 21px 'Bricolage Grotesque',sans-serif;text-decoration:none;letter-spacing:-.02em}.logo span{color:var(--mute);font-weight:500}
+.links{display:flex;gap:26px;align-items:center;font-size:14px;font-weight:600}.links a{text-decoration:none;color:var(--mute)}.links a:hover{color:var(--ink)}
+.btn{display:inline-block;border:1px solid var(--acc);background:var(--acc);color:#0a1122;padding:12px 22px;border-radius:999px;font-weight:700;font-size:14px;cursor:pointer;text-decoration:none;transition:.2s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(141,123,255,.35)}.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}.btn.ghost:hover{border-color:var(--acc);box-shadow:none}.btn.sm{padding:8px 16px;font-size:13px}.btn:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
+.view{display:none}.view.on{display:block}
+.eyebrow{font-size:13px;font-weight:700;color:var(--acc)}
+.hero{padding:84px 0 64px;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+h1,h2{font-family:'Bricolage Grotesque',sans-serif;font-weight:800}
+h1{font-size:clamp(40px,5.6vw,68px);line-height:1.02;letter-spacing:-.035em;margin:14px 0 20px}
+h2{font-size:clamp(28px,3.4vw,42px);letter-spacing:-.03em;margin:8px 0 28px;line-height:1.1}
+.lead{color:var(--mute);font-size:18px;max-width:540px}.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--sh);padding:24px}
+.scanner{position:relative;overflow:hidden;padding:22px 22px 14px}
+.ln{--c:transparent;display:flex;justify-content:space-between;gap:12px;padding:11px 18px;margin:9px 0;border-radius:999px;font-size:14px;font-weight:600;animation:lit 7s infinite;animation-delay:var(--d)}
+.ln.r{--c:rgba(255,107,125,.3)}.ln.g{--c:rgba(70,216,154,.26)}.ln.b{--c:rgba(92,200,255,.24)}.ln small{color:var(--mute);font-weight:500}
+.beam{position:absolute;left:0;right:0;height:80px;top:-80px;background:linear-gradient(to bottom,transparent,rgba(141,123,255,.35));border-bottom:2px solid var(--acc);animation:sweep 7s linear infinite;pointer-events:none}
+@keyframes sweep{0%{top:-80px}70%,100%{top:100%}}
+@keyframes lit{0%,6%{background:transparent}12%,88%{background:var(--c)}100%{background:transparent}}
+@media(prefers-reduced-motion:reduce){.ln{animation:none;background:var(--c)}.beam{display:none}}
+section.block{padding:72px 0;border-top:1px solid var(--line)}
+.defs{display:grid;grid-template-columns:1fr 1fr;gap:0 56px}.defs div{padding:18px 0;border-bottom:1px solid var(--line)}.defs b{display:block;font-size:17px}.defs span{color:var(--mute);font-size:15px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:24px;counter-reset:s;padding:0;margin:0;list-style:none}
+.steps li{counter-increment:s;border-top:2px solid var(--acc);padding-top:12px}.steps li:before{content:counter(s);font:800 30px 'Bricolage Grotesque';color:var(--acc);display:block}.steps b{display:block}.steps span{color:var(--mute);font-size:15px}
+footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mute);font-size:14px}footer .wrap{display:flex;flex-wrap:wrap;gap:20px 32px;justify-content:space-between}
+.legal p{color:var(--mute);font-size:14px;max-width:760px}.legal b{color:var(--ink)}
+.page{padding:56px 0 80px}.narrow{max-width:760px;margin:0 auto}
+.drop{display:block;margin-top:28px;border:2px dashed #3a4c80;border-radius:20px;background:rgba(17,28,56,.6);padding:52px 24px;text-align:center;cursor:pointer;transition:.2s}.drop.hot,.drop:hover{border-color:var(--acc);background:rgba(141,123,255,.1)}
+.file{display:flex;gap:12px;align-items:center;padding:12px 16px;border:1px solid var(--line);border-radius:12px;background:var(--card);margin-top:10px;font-size:14px}.file span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}.file small{color:var(--mute)}.file button{border:0;background:none;color:var(--red);font-weight:700;cursor:pointer}
+.field{margin:22px 0}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
+select{padding:11px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);min-width:180px}
+.progress{height:6px;background:var(--line);border-radius:9px;overflow:hidden;margin-top:18px;display:none}.progress i{display:block;height:100%;width:0;background:var(--acc);transition:width .2s}
+.note{font-size:13px;color:var(--mute)}.err{color:var(--red);font-weight:600;margin-top:12px}
+.warn{border:1px solid rgba(255,200,90,.4);background:rgba(255,200,90,.08);border-radius:14px;padding:14px 18px;margin-bottom:16px;font-size:14px;color:#f3dfa8}
+.badge{display:inline-block;font-size:13px;font-weight:700;color:var(--blue);border:1px solid rgba(92,200,255,.4);border-radius:999px;padding:3px 12px}
+.dh{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:28px}.dh h2{margin:10px 0 4px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:24px}
+.stat{padding:18px 20px}.stat b{display:block;font:800 36px 'Bricolage Grotesque';letter-spacing:-.03em;line-height:1.1}.stat span{font-size:13px;color:var(--mute);font-weight:600}.stat.red b{color:var(--red)}.stat.green b{color:var(--green)}.stat.amber b{color:var(--amber)}.stat.blue b{color:var(--blue)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}.two h4,#scanbox h4{margin:0 0 8px;font-size:16px}.two p,#scanbox p{margin:0;color:#c9d3f2;font-size:15px}.two ul{margin:10px 0 0;padding-left:18px;font-size:14px;color:var(--mute)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 18px}.chip{border:1px solid var(--line);background:transparent;border-radius:999px;padding:7px 16px;font-size:13px;font-weight:700;cursor:pointer}.chip.on{background:var(--acc);color:#0a1122;border-color:var(--acc)}
+.res{display:flex;gap:16px;padding:18px 20px;margin-bottom:12px;border-left:5px solid var(--line);border-radius:14px}.res.red{border-left-color:var(--red)}.res.green{border-left-color:var(--green)}.res.amber{border-left-color:var(--amber)}.res.blue{border-left-color:var(--blue)}
+.res h4{margin:0 0 2px;font-size:16px}.res p{margin:4px 0 0;font-size:14px;color:#c9d3f2}.res small{color:var(--mute)}
+.tag{font-size:11px;font-weight:800;letter-spacing:.06em;padding:3px 10px;border-radius:999px;margin-left:8px;vertical-align:middle}
+.red .tag{background:rgba(255,107,125,.15);color:var(--red)}.green .tag{background:rgba(70,216,154,.14);color:var(--green)}.amber .tag{background:rgba(255,200,90,.14);color:var(--amber)}.blue .tag{background:rgba(92,200,255,.14);color:var(--blue)}
+.viewer{margin-top:56px}.vbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}.vbar .sp{flex:1}
+.pane{height:76vh;overflow:auto;background:#182446;border:1px solid var(--line);border-radius:18px;padding:20px;text-align:center}.pane img{max-width:none;box-shadow:0 4px 24px rgba(0,0,0,.4);background:#fff}
+.legend{display:flex;gap:18px;font-size:13px;color:var(--mute);font-weight:600;margin-top:12px;flex-wrap:wrap}.legend i{display:inline-block;width:34px;height:12px;border-radius:9px;vertical-align:middle;margin-right:6px}
+.player{margin-top:40px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}.dls{display:flex;gap:10px;flex-wrap:wrap}
+@media(max-width:820px){.hero,.two,.defs{grid-template-columns:1fr}.links a:not(.btn){display:none}.hero{padding-top:48px}}
+@media print{:root{--bg:#fff;--card:#fff;--ink:#000;--mute:#444;--line:#ccc}body{background:#fff}.nav,footer,.viewer,.player,.chips,.dls,#home,#upload{display:none!important}.card{box-shadow:none}.two p,.res p,#scanbox p{color:#000}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="wrap">
+  <a class="logo" href="#/">Pixelab <span>Report</span></a>
+  <div class="links"><a href="#/">Home</a><a href="#/how">How It Works</a><a href="#/features">Features</a><a href="#/about">About</a><a class="btn sm" href="#/upload">Get started</a></div>
+</div></nav>
+
+<main>
+<!-- HOME -->
+<div id="home" class="view on">
+ <div class="wrap hero">
+  <div>
+   <div class="eyebrow">Reports, scans, photos and prescriptions</div>
+   <h1>Understand any medical report.</h1>
+   <p class="lead">Upload a blood test, MRI or CT report, prescription, phone photo or scan file. Pixelab Report marks what matters on your own pages and explains it in simple English, Hindi or Hinglish.</p>
+   <div class="row"><button class="btn" id="demoBtn">Try a sample report</button><a class="btn ghost" href="#/upload">Analyze my own report</a></div>
+  </div>
+  <div class="card scanner">
+   <div class="beam"></div>
+   <div class="note" style="margin-bottom:6px">Sample report, read live</div>
+   <div class="ln g" style="--d:1.2s"><span>Hemoglobin</span><span>15.1 <small>12.5–17.0</small></span><span>NORMAL</span></div>
+   <div class="ln r" style="--d:2s"><span>WBC</span><span>3.1 <small>4.0–10.5</small></span><span>LOW</span></div>
+   <div class="ln r" style="--d:2.8s"><span>Glucose</span><span>105 <small>65–99</small></span><span>HIGH</span></div>
+   <div class="ln b" style="--d:3.6s"><span>MRI brain</span><span>No acute abnormality</span><span>REPORTED</span></div>
+   <p class="note" style="margin:12px 0 0">Red is outside the printed range, green is within it.</p>
+  </div>
+ </div>
+ <section class="block" id="features"><div class="wrap"><div class="eyebrow">What it reads</div><h2>Almost any document a patient is handed.</h2>
+  <div class="defs">
+   <div><b>Blood, urine and other lab tests</b><span>Every value checked against the range printed on your report.</span></div>
+   <div><b>MRI, CT, X-ray and ultrasound reports</b><span>Findings and impressions explained line by line.</span></div>
+   <div><b>Phone photos and scanned PDFs</b><span>Tilted, shadowed or photographed pages, including iPhone HEIC.</span></div>
+   <div><b>Scan images and DICOM files</b><span>A general description of what kind of scan it is. Never a diagnosis.</span></div>
+   <div><b>Prescriptions and discharge summaries</b><span>What each medicine is generally for, and what to ask your doctor.</span></div>
+   <div><b>Hindi, Hinglish and voice</b><span>Text in three languages, with a spoken summary in Hindi or English.</span></div>
+  </div></div></section>
+ <section class="block" id="how"><div class="wrap"><div class="eyebrow">How it works</div><h2>From confusing pages to clear answers.</h2>
+  <ol class="steps">
+   <li><b>Add your files</b><span>PDF, photo, camera shot, DICOM or ZIP.</span></li>
+   <li><b>AI reads every page</b><span>Names, values, findings and ranges.</span></li>
+   <li><b>Rows are highlighted</b><span>Drawn directly on your original pages.</span></li>
+   <li><b>Read the explanations</b><span>Plain words, no jargon.</span></li>
+   <li><b>Listen</b><span>Hear the summary in Hindi or English.</span></li>
+  </ol></div></section>
+ <section class="block legal" id="about"><div class="wrap"><div class="eyebrow">About, privacy and disclaimer</div>
+  <h2>Built to help you ask better questions.</h2>
+  <p><b>About.</b> Pixelab Report turns medical documents into a visual, plain-language explanation so you can have a more informed conversation with your doctor.</p>
+  <p id="privacy"><b>Privacy Policy.</b> Your files are processed in memory, are not saved to disk and are deleted automatically after about 30 minutes. They are sent to Google's Gemini AI service to be read and explained, and Google's own data terms apply to that. DICOM files are converted to pictures; their patient data fields are not sent, but names printed on the image itself may be. Do not upload anything unless you accept this.</p>
+  <p id="terms"><b>Terms.</b> The service is provided as is, without guarantees of accuracy. Always check the highlighted results against your original report.</p>
+  <p id="disclaimer"><b>Medical Disclaimer.</b> Pixelab Report does not give medical advice, diagnosis or treatment. It cannot read a scan the way a radiologist does. Results inside a printed range do not prove you are healthy, and results outside it do not prove disease. Please consult a qualified doctor.</p>
+ </div></section>
+</div>
+
+<!-- UPLOAD -->
+<div id="upload" class="view"><div class="wrap page narrow">
+ <div class="eyebrow">Step 1 of 2</div><h2>Add your report or scan.</h2>
+ <p class="lead" style="margin-top:-10px">Blood tests, MRI or CT reports, prescriptions, phone photos, scanned PDFs or DICOM scan files.</p>
+ <label class="drop" id="drop"><input id="fin" type="file" multiple hidden>
+  <b>Drop files here, or click to browse</b><div class="note">PDF, JPG, PNG, WEBP, HEIC, DICOM (.dcm) or a ZIP of scan files · up to 50 pages, 40 MB</div></label>
+ <div class="row" style="margin-top:12px"><label class="btn ghost sm">Take a photo<input id="cam" type="file" accept="image/*" capture="environment" hidden></label></div>
+ <div id="flist"></div>
+ <p class="note" style="margin-top:14px">Photos work best flat, in good light, with the whole page in frame. Add every page of a multi-page report. A raw scan image only gets a general description, so add the radiologist's report too if you have it.</p>
+ <div class="field"><label for="lang">Explain in</label><select id="lang"><option>English</option><option>Hindi</option><option>Hinglish</option></select></div>
+ <button class="btn" id="go" disabled>Analyze report</button>
+ <div class="progress" id="prog"><i id="bar"></i></div><div class="note" id="status" style="margin-top:10px"></div><div class="err" id="err"></div>
+ <p class="note" style="margin-top:28px">Your files are processed in memory and sent to Google's Gemini AI to be read. They are not stored permanently. Avoid uploading them if you do not accept this. <a href="#/privacy">Privacy policy</a></p>
+</div></div>
+
+<!-- DASHBOARD -->
+<div id="report" class="view"><div class="wrap page">
+ <div class="dh"><div><span class="badge" id="dtype"></span><h2 id="rname"></h2><div class="note" id="rdate"></div></div>
+  <div class="dls"><a class="btn sm" id="dlM">Marked report (PDF)</a><a class="btn sm ghost" id="dlO">Original (PDF)</a><button class="btn sm ghost" onclick="window.print()">Summary (PDF)</button><a class="btn sm ghost" href="#/upload">New report</a></div></div>
+ <div class="cards" id="cards"></div>
+ <div class="warn" id="scanwarn" hidden><b>About scan images.</b> AI cannot read an MRI, CT or X-ray the way a radiologist does. It cannot find or rule out disease. Please have a radiologist or doctor review your scan.</div>
+ <div class="card" id="scanbox" hidden style="margin-bottom:16px"><h4>What the image shows</h4><div id="scantxt"></div></div>
+ <div class="two"><div class="card"><h4>AI Summary</h4><p id="sgood"></p><p id="sbad" style="margin-top:10px"></p></div><div class="card"><h4>Discuss with your doctor</h4><ul id="sdoc"></ul></div></div>
+ <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px"><div class="eyebrow">Results</div>
+  <select id="lang2"><option>English</option><option>Hindi</option><option>Hinglish</option></select></div>
+ <div id="resbox"><div class="chips" id="chips"></div><div id="list"></div></div>
+
+ <div class="viewer"><div class="eyebrow">Marked report</div><h2>Your Report, Explained.</h2>
+  <div class="vbar"><button class="btn sm ghost" id="prev">‹ Prev</button><b id="pgno" style="font-size:14px"></b><button class="btn sm ghost" id="next">Next ›</button><span class="sp"></span>
+   <button class="btn sm ghost" id="zo">−</button><span id="zv" class="note"></span><button class="btn sm ghost" id="zi">+</button></div>
+  <div class="pane"><img id="pimg" alt="Marked report page"></div>
+  <div class="legend"><span><i style="background:rgba(255,105,105,.6)"></i>Outside range (low / high / abnormal)</span><span><i style="background:rgba(110,215,140,.7)"></i>Within range</span><span><i style="background:rgba(255,205,90,.7)"></i>Unclear</span></div></div>
+
+ <div class="player card"><div style="flex:1;min-width:200px"><div class="eyebrow">Listen</div><b>Hear your explanation</b></div>
+  <select id="voice"><option value="hi">Hindi</option><option value="en">English</option></select>
+  <button class="btn sm" id="play">Listen</button><button class="btn sm ghost" id="pause">Pause</button><button class="btn sm ghost" id="resume">Resume</button><button class="btn sm ghost" id="stop">Stop</button><button class="btn sm ghost" id="replay">Replay</button>
+  <a class="btn sm ghost" id="dlA" style="display:none" download="pixelab-explanation.mp3">Download audio</a><span class="note" id="astat" style="width:100%"></span></div>
+</div></div>
+</main>
+
+<footer><div class="wrap"><div><b style="color:var(--ink)">Pixelab Report</b><div>Not medical advice. Please consult a doctor.</div></div>
+ <div style="display:flex;gap:22px;flex-wrap:wrap"><a href="#/about">About</a><a href="#/privacy">Privacy Policy</a><a href="#/terms">Terms</a><a href="#/disclaimer">Medical Disclaimer</a><a href="mailto:contact@example.com">Contact</a></div></div></footer>
+
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const BAD=['LOW','HIGH','ABNORMAL'],tone=s=>BAD.includes(s)?'red':s==='NORMAL'?'green':s==='INFO'?'blue':'amber';
+let D=null,files=[],filter='all',page=1,zoom=100,audio=null,akey='';
+
+function route(){
+  const h=location.hash||'#/',key=h.replace('#/','');
+  const v=key==='upload'?'upload':key==='report'&&D?'report':'home';
+  document.querySelectorAll('.view').forEach(e=>e.classList.toggle('on',e.id===v));
+  const t=document.getElementById(key);
+  if(v==='home'&&t)t.scrollIntoView(); else window.scrollTo(0,0);
+}
+addEventListener('hashchange',route);route();
+
+// ---- upload ----
+const fin=$('#fin'),drop=$('#drop');
+const OK=/(\.(pdf|png|jpe?g|webp|heic|heif|bmp|tiff?|dcm|dicom|zip)|^[^.]+)$/i;
+async function shrink(f){if(!/^image\/(jpeg|png|webp)$/.test(f.type)||f.size<1.5e6)return f;
+ try{const b=await createImageBitmap(f),k=Math.min(1,2200/Math.max(b.width,b.height)),c=document.createElement('canvas');c.width=b.width*k;c.height=b.height*k;c.getContext('2d').drawImage(b,0,0,c.width,c.height);
+ const bl=await new Promise(r=>c.toBlob(r,'image/jpeg',.9));return bl&&bl.size<f.size?new File([bl],f.name.replace(/\.\w+$/,'')+'.jpg',{type:'image/jpeg'}):f}catch(_){return f}}
+async function addFiles(l){for(const f of l)if(OK.test(f.name))files.push(await shrink(f));renderFiles()}
+function renderFiles(){
+  $('#flist').innerHTML=files.map((f,i)=>`<div class="file"><span>${esc(f.name)}</span><small>${(f.size/1048576).toFixed(2)} MB</small><button data-rm="${i}">Remove</button></div>`).join('');
+  $('#go').disabled=!files.length;
+}
+fin.onchange=()=>{addFiles(fin.files);fin.value=''};const cam=$('#cam');cam.onchange=()=>{addFiles(cam.files);cam.value=''};
+$('#flist').onclick=e=>{if(e.target.dataset.rm!==undefined){files.splice(+e.target.dataset.rm,1);renderFiles()}};
+['dragover','dragenter'].forEach(n=>drop.addEventListener(n,e=>{e.preventDefault();drop.classList.add('hot')}));
+['dragleave','drop'].forEach(n=>drop.addEventListener(n,e=>{e.preventDefault();drop.classList.remove('hot')}));
+drop.addEventListener('drop',e=>addFiles(e.dataTransfer.files));
+
+$('#go').onclick=()=>{
+  const fd=new FormData();files.forEach(f=>fd.append('files',f));fd.append('language',$('#lang').value);
+  const x=new XMLHttpRequest();x.open('POST','/api/analyze');
+  $('#go').disabled=true;$('#err').textContent='';$('#prog').style.display='block';$('#bar').style.width='0';
+  x.upload.onprogress=e=>{if(e.lengthComputable){const p=Math.round(e.loaded/e.total*100);$('#bar').style.width=p+'%';
+    $('#status').textContent=p<100?`Uploading… ${p}%`:'Reading your report with AI. Long reports can take a minute…'}};
+  x.onload=()=>{
+    $('#go').disabled=false;$('#prog').style.display='none';$('#status').textContent='';
+    let j={};try{j=JSON.parse(x.responseText)}catch(e){}
+    if(x.status!==200){$('#err').textContent=j.detail||'Something went wrong. Please try again.';return}
+    D=j;page=1;zoom=100;filter='all';akey='';audio=null;$('#lang2').value=D.language;render();location.hash='#/report';
+  };
+  x.onerror=()=>{$('#go').disabled=false;$('#prog').style.display='none';$('#err').textContent='Network error. Please try again.'};
+  x.send(fd);
+};
+$('#demoBtn').onclick=async()=>{const b=$('#demoBtn');b.disabled=true;b.textContent='Loading sample…';
+  try{const r=await fetch('/api/demo');if(!r.ok)throw 0;D=await r.json();page=1;zoom=100;filter='all';akey='';audio=null;$('#lang2').value=D.language;render();location.hash='#/report'}
+  catch(e){alert('Could not load the sample. Please try again.')}
+  b.disabled=false;b.textContent='Try a sample report'};
+
+// ---- dashboard ----
+function render(){
+  const it=D.items,E=D.explain||{},S=D.sources||{},n=s=>it.filter(i=>i.status===s).length;
+  $('#rname').textContent=D.name;$('#rdate').textContent=`Analysed ${D.date} · ${D.pages} page(s)`+(D.stats?` · read in ${D.stats.seconds}s`+(D.stats.est_cost_usd?` · about $${D.stats.est_cost_usd}`:''):'')+(D.unreadable_pages?` · ${D.unreadable_pages} page(s) could not be read`:'');
+  $('#dlM').href=`/api/report/${D.id}/report.pdf?marked=1`;$('#dlO').href=`/api/report/${D.id}/report.pdf?marked=0`;
+  const lab=D.doc_type==='lab',st=D.doc_type==='scan'?[['Images read',D.pages,'']]:[[lab?'Total tests':'Items found',it.length,''],['Normal',n('NORMAL'),'green'],['Low',n('LOW'),'red'],['High',n('HIGH'),'red'],['Unclear',n('UNCLEAR'),'amber']].filter(x=>lab||x[1]||!x[2]);
+  if(n('ABNORMAL'))st.push(['Flagged abnormal',n('ABNORMAL'),'red']);if(n('INFO'))st.push(['Listed',n('INFO'),'blue']);
+  $('#cards').innerHTML=st.map(s=>`<div class="card stat ${s[2]}"><b>${s[1]}</b><span>${s[0]}</span></div>`).join('');
+  $('#sgood').textContent=E.good_summary||'';$('#sbad').textContent=E.concern_summary||'';
+  $('#sdoc').innerHTML=(E.doctor_points||[]).map(p=>`<li>${esc(p)}</li>`).join('');
+  const kinds=[['all','All'],['NORMAL','Normal'],['LOW','Low'],['HIGH','High'],['UNCLEAR','Unclear']];if(n('ABNORMAL'))kinds.push(['ABNORMAL','Abnormal']);if(n('INFO'))kinds.push(['INFO','Listed']);
+  const T={lab:'Lab report',report:'Medical report',prescription:'Prescription',scan:'Scan image'},sc=D.scans||[];
+  $('#dtype').textContent=[D.demo?'Sample':null,T[D.doc_type],D.modality,D.body_part].filter(Boolean).join(' · ');
+  $('#scanwarn').hidden=!(D.doc_type==='scan'||sc.length);$('#scanbox').hidden=!sc.length;$('#scantxt').innerHTML=sc.map(x=>`<p>${esc(x)}</p>`).join('');
+  $('#resbox').style.display=it.length?'':'none';
+  $('#chips').innerHTML=kinds.map(k=>`<button class="chip ${filter===k[0]?'on':''}" data-f="${k[0]}">${k[1]}</button>`).join('');
+  const rank=s=>BAD.includes(s)?0:s==='UNCLEAR'?1:2;
+  $('#list').innerHTML=[...it].filter(i=>filter==='all'||i.status===filter).sort((a,b)=>rank(a.status)-rank(b.status)||a.page-b.page||a.id-b.id).map(i=>`
+   <article class="card res ${tone(i.status)}"><div style="flex:1"><h4>${esc(i.name)}<span class="tag">${esc(i.status)}</span></h4>
+   <p class="val"><b>${esc(i.value_text??i.value_number??'—')} ${esc(i.unit||'')}</b> ${i.kind==='lab'?' · Reference: '+esc(i.ref_text||'not printed'):''}</p>
+   <p>${esc((E.explanations||{})[i.id]||'')}</p><small>${S[i.id]?'Grounded in '+esc(S[i.id].title)+' notes · ':''}Page ${i.page}${i.verified===false?' · ⚠ check this value against your report':''}${i.located?'':' · row could not be located, so it is not highlighted'}</small></div></article>`).join('')||'<p class="note">No results in this category.</p>';
+  showPage();
+}
+$('#chips').onclick=e=>{if(e.target.dataset.f){filter=e.target.dataset.f;render()}};
+$('#lang2').onchange=async e=>{
+  const l=e.target.value;$('#astat').textContent='';
+  try{const r=await fetch(`/api/report/${D.id}/explain?language=${l}`);if(!r.ok)throw 0;D.explain=await r.json();D.language=l;audio=null;akey='';render()}
+  catch(_){alert('Could not change the language. Your report may have expired; please upload it again.');e.target.value=D.language}
+};
+
+// ---- viewer ----
+function showPage(){$('#pimg').src=`/api/report/${D.id}/page/${page}.png?marked=1`;$('#pimg').style.width=zoom+'%';$('#pgno').textContent=`Page ${page} of ${D.pages}`;$('#zv').textContent=zoom+'%'}
+$('#prev').onclick=()=>{if(page>1){page--;showPage()}};$('#next').onclick=()=>{if(page<D.pages){page++;showPage()}};
+$('#zi').onclick=()=>{zoom=Math.min(300,zoom+25);showPage()};$('#zo').onclick=()=>{zoom=Math.max(50,zoom-25);showPage()};
+
+// ---- audio ----
+$('#play').onclick=async()=>{
+  const v=$('#voice').value,k=v+'|'+D.language;
+  if(!audio||akey!==k){
+    $('#astat').textContent='Preparing audio…';
+    try{const r=await fetch(`/api/report/${D.id}/audio?lang=${v}&language=${D.language}`,{method:'POST'});if(!r.ok)throw 0;
+      const url=URL.createObjectURL(await r.blob());audio=new Audio(url);akey=k;audio.onended=()=>$('#astat').textContent='Finished.';
+      $('#dlA').href=url;$('#dlA').style.display='inline-block'}
+    catch(_){$('#astat').textContent='Audio could not be created. Please try again.';return}
+  }
+  audio.currentTime=0;audio.play();$('#astat').textContent='Playing…';
+};
+$('#pause').onclick=()=>{audio&&audio.pause();$('#astat').textContent='Paused.'};
+$('#resume').onclick=()=>{audio&&audio.play();$('#astat').textContent='Playing…'};
+$('#stop').onclick=()=>{if(audio){audio.pause();audio.currentTime=0}$('#astat').textContent='Stopped.'};
+$('#replay').onclick=()=>{if(audio){audio.currentTime=0;audio.play();$('#astat').textContent='Playing…'}};
+$('#voice').onchange=()=>{if(audio)audio.pause()};
+</script>
+</body>
+</html>

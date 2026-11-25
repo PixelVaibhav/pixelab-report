@@ -1,0 +1,285 @@
+{
+ "name": "Sample health check (demo)",
+ "doc_type": "lab",
+ "modality": null,
+ "body_part": null,
+ "items": [
+  {
+   "id": 0,
+   "page": 1,
+   "kind": "lab",
+   "name": "Hemoglobin",
+   "value_text": "11.2",
+   "value_number": 11.2,
+   "unit": "g/dL",
+   "ref_text": "13.0-17.0",
+   "ref_min": 13.0,
+   "ref_max": 17.0,
+   "flag": "unclear",
+   "status": "LOW",
+   "box": [
+    186.7577197149644,
+    67.22689075630252,
+    203.0760160251355,
+    866.4873908547794
+   ],
+   "located": true,
+   "verified": true
+  },
+  {
+   "id": 1,
+   "page": 1,
+   "kind": "lab",
+   "name": "RBC",
+   "value_text": "4.9",
+   "value_number": 4.9,
+   "unit": "mill/cumm",
+   "ref_text": "4.5-5.5",
+   "ref_min": 4.5,
+   "ref_max": 5.5,
+   "flag": "unclear",
+   "status": "NORMAL",
+   "box": [
+    215.26128266033254,
+    67.22689075630252,
+    231.57957897050363,
+    733.9327259224002
+   ],
+   "located": true,
+   "verified": true
+  },
+  {
+   "id": 2,
+   "page": 1,
+   "kind": "lab",
+   "name": "WBC",
+   "value_text": "12.4",
+   "value_number": 12.4,
+   "unit": "10^3/uL",
+   "ref_text": "4.0-11.0",
+   "ref_min": 4.0,
+   "ref_max": 11.0,
+   "flag": "unclear",
+   "status": "HIGH",
+   "box": [
+    243.7648456057007,
+    67.22689075630252,
+    260.0831419158718,
+    869.2772616859244
+   ],
+   "located": true,
+   "verified": true
+  },
+  {
+   "id": 3,
+   "page": 1,
+   "kind": "lab",
+   "name": "Platelets",
+   "value_text": "250",
+   "value_number": 250.0,
+   "unit": "10^3/uL",
+   "ref_text": "150-410",
+   "ref_min": 150,
+   "ref_max": 410,
+   "flag": "unclear",
+   "status": "NORMAL",
+   "box": [
+    272.2684085510689,
+    67.22689075630252,
+    288.58670486124,
+    743.2772596343225
+   ],
+   "located": true,
+   "verified": true
+  },
+  {
+   "id": 4,
+   "page": 1,
+   "kind": "lab",
+   "name": "MCV",
+   "value_text": "78.0",
+   "value_number": 78.0,
+   "unit": "fL",
+   "ref_text": "83-101",
+   "ref_min": 83,
+   "ref_max": 101,
+   "flag": "unclear",
+   "status": "LOW",
+   "box": [
+    300.771971496437,
+    67.22689075630252,
+    317.0902496845309,
+    866.4873908547794
+   ],
+   "located": true,
+   "verified": true
+  },
+  {
+   "id": 5,
+   "page": 1,
+   "kind": "lab",
+   "name": "Fasting Glucose",
+   "value_text": "112",
+   "value_number": 112.0,
+   "unit": "mg/dL",
+   "ref_text": "70-99",
+   "ref_min": 70,
+   "ref_max": 99,
+   "flag": "unclear",
+   "status": "HIGH",
+   "box": [
+    329.27553444180523,
+    67.22689075630252,
+    345.5938126298991,
+    869.2772616859244
+   ],
+   "located": true,
+   "verified": true
+  },
+  {
+   "id": 6,
+   "page": 1,
+   "kind": "lab",
+   "name": "ALT (SGPT)",
+   "value_text": "62",
+   "value_number": 62.0,
+   "unit": "U/L",
+   "ref_text": "0-45",
+   "ref_min": 0,
+   "ref_max": 45,
+   "flag": "unclear",
+   "status": "HIGH",
+   "box": [
+    357.7790973871734,
+    67.22689075630252,
+    374.0973755752672,
+    869.2772616859244
+   ],
+   "located": true,
+   "verified": true
+  },
+  {
+   "id": 7,
+   "page": 1,
+   "kind": "lab",
+   "name": "Total Cholesterol",
+   "value_text": "228",
+   "value_number": 228.0,
+   "unit": "mg/dL",
+   "ref_text": "0-200",
+   "ref_min": 0,
+   "ref_max": 200,
+   "flag": "unclear",
+   "status": "HIGH",
+   "box": [
+    386.2826603325415,
+    67.22689075630252,
+    402.6009385206354,
+    869.2772616859244
+   ],
+   "located": true,
+   "verified": true
+  },
+  {
+   "id": 8,
+   "page": 1,
+   "kind": "lab",
+   "name": "Vitamin D",
+   "value_text": "18",
+   "value_number": 18.0,
+   "unit": "ng/mL",
+   "ref_text": "30-100",
+   "ref_min": 30,
+   "ref_max": 100,
+   "flag": "unclear",
+   "status": "LOW",
+   "box": [
+    414.78622327790976,
+    67.22689075630252,
+    431.10450146600357,
+    866.4873908547794
+   ],
+   "located": true,
+   "verified": true
+  }
+ ],
+ "explain": {
+  "good_summary": "In this sample report, 2 results are within the printed range: RBC, Platelets.",
+  "concern_summary": "7 results are outside the printed range: Hemoglobin, WBC, MCV, Fasting Glucose, ALT (SGPT), Total Cholesterol, Vitamin D. This is a made-up sample, but on a real report you should talk to a doctor about any result outside its range.",
+  "doctor_points": [
+   "Which of the results outside the range matter most for me?",
+   "Do any of these need a repeat test?",
+   "Could my diet, medicines or a recent illness explain these results?",
+   "When should I test again?"
+  ],
+  "explanations": {
+   "0": "This test measures the protein in red blood cells that carries oxygen around the body. This result is low compared with the printed range. A low result can be linked to iron, vitamin B12 or folate deficiency, blood loss, or long-term illness. Ask your doctor what it means for you.",
+   "1": "This test measures the number of red blood cells, which carry oxygen. This result is within the printed range.",
+   "2": "This test measures the number of white blood cells, which fight infection. This result is high compared with the printed range. A high result can be linked to infection, inflammation, stress, smoking or some medicines. Ask your doctor what it means for you.",
+   "3": "This test measures tiny cell pieces that help blood clot. This result is within the printed range.",
+   "4": "This test measures the average size of your red blood cells. This result is low compared with the printed range. A low result can be linked to small red cells, often with iron deficiency. Ask your doctor what it means for you.",
+   "5": "This test measures the amount of sugar in your blood. This result is high compared with the printed range. A high result can be linked to eating before a fasting test, stress, infection, or diabetes or pre-diabetes. Ask your doctor what it means for you.",
+   "6": "This test measures an enzyme found mostly in the liver that leaks into the blood when liver cells are irritated. This result is high compared with the printed range. A high result can be linked to fatty liver, alcohol, some medicines, viral infections of the liver or other liver irritation. Ask your doctor what it means for you.",
+   "7": "This test measures the total amount of cholesterol, a fatty substance, in your blood. This result is high compared with the printed range. A high result can be linked to a diet high in saturated fat, little exercise, family history, or thyroid and kidney conditions. Ask your doctor what it means for you.",
+   "8": "This test measures the level of vitamin D, which helps the body absorb calcium for bones. This result is low compared with the printed range. A low result can be linked to little sun exposure, diet, darker skin, or absorption problems. Ask your doctor what it means for you."
+  },
+  "spoken_english": "This is a sample report. Some results are inside the printed range and some are outside it. For any result outside the range, please talk to a doctor.",
+  "spoken_hindi": "यह एक नमूना रिपोर्ट है। इसमें कुछ नतीजे छपी हुई सीमा के अंदर हैं और कुछ बाहर हैं। जो नतीजे सीमा से बाहर हैं, उनके बारे में कृपया डॉक्टर से बात करें।"
+ },
+ "sources": {
+  "0": {
+   "kb_id": "hemoglobin",
+   "title": "Hemoglobin",
+   "score": 1.0,
+   "method": "alias"
+  },
+  "1": {
+   "kb_id": "rbc",
+   "title": "RBC",
+   "score": 1.0,
+   "method": "alias"
+  },
+  "2": {
+   "kb_id": "wbc",
+   "title": "WBC",
+   "score": 1.0,
+   "method": "alias"
+  },
+  "3": {
+   "kb_id": "platelets",
+   "title": "Platelets",
+   "score": 1.0,
+   "method": "alias"
+  },
+  "4": {
+   "kb_id": "mcv",
+   "title": "MCV",
+   "score": 1.0,
+   "method": "alias"
+  },
+  "5": {
+   "kb_id": "glucose",
+   "title": "Glucose",
+   "score": 1.0,
+   "method": "alias"
+  },
+  "6": {
+   "kb_id": "alt",
+   "title": "ALT",
+   "score": 1.0,
+   "method": "alias"
+  },
+  "7": {
+   "kb_id": "cholesterol",
+   "title": "Total Cholesterol",
+   "score": 1.0,
+   "method": "alias"
+  },
+  "8": {
+   "kb_id": "vitamin_d",
+   "title": "Vitamin D",
+   "score": 1.0,
+   "method": "alias"
+  }
+ }
+}
